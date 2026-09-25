@@ -30,7 +30,7 @@ return {
       require("claudecode").setup()
 
       local profiles = {
-        ADDI = vim.fn.expand "~/.claude-profiles/ADDI",
+        -- ADDI = vim.fn.expand "~/.claude-profiles/ADDI",
         Default = vim.fn.expand "~/.claude-profiles/Default",
       }
 
@@ -67,7 +67,7 @@ return {
           return
         end
 
-        vim.ui.select({ "ADDI", "Default" }, { prompt = "Select Claude profile" }, function(choice)
+        vim.ui.select({ "Default" }, { prompt = "Select Claude profile" }, function(choice)
           if choice then switch_profile(choice) end
         end)
       end, {
