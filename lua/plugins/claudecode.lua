@@ -30,8 +30,8 @@ return {
       require("claudecode").setup()
 
       local profiles = {
-        -- ADDI = vim.fn.expand "~/.claude-profiles/ADDI",
-        Default = vim.fn.expand "~/.claude-profiles/Default",
+        Personal = vim.fn.expand "~/.claude-profiles/Personal",
+        Cobaltix = vim.fn.expand "~/.claude-profiles/Cobaltix",
       }
 
       local function switch_profile(name)
@@ -67,12 +67,12 @@ return {
           return
         end
 
-        vim.ui.select({ "Default" }, { prompt = "Select Claude profile" }, function(choice)
+        vim.ui.select({ "Personal", "Cobaltix" }, { prompt = "Select Claude profile" }, function(choice)
           if choice then switch_profile(choice) end
         end)
       end, {
         nargs = "?",
-        complete = function() return { "ADDI", "Default" } end,
+        complete = function() return { "Personal", "Cobaltix" } end,
         desc = "Switch Claude Code profile",
       })
 
@@ -82,8 +82,8 @@ return {
           vim.notify(
             string.format(
               "Profile: %s\nCLAUDE_CONFIG_DIR: %s",
-              vim.g.claude_profile or "Default",
-              vim.env.CLAUDE_CONFIG_DIR or profiles.Default
+              vim.g.claude_profile or "Personal",
+              vim.env.CLAUDE_CONFIG_DIR or profiles.Personal
             )
           )
         end,
@@ -93,8 +93,8 @@ return {
       )
 
       if not vim.env.CLAUDE_CONFIG_DIR then
-        vim.env.CLAUDE_CONFIG_DIR = profiles.Default
-        vim.g.claude_profile = "Default"
+        vim.env.CLAUDE_CONFIG_DIR = profiles.Personal
+        vim.g.claude_profile = "Personal"
       end
     end,
 
@@ -111,13 +111,13 @@ return {
       },
       {
         "<leader>aw",
-        "<cmd>ClaudeProfile ADDI<cr>",
-        desc = "Claude profile: ADDI",
+        "<cmd>ClaudeProfile Cobaltix<cr>",
+        desc = "Claude profile: Cobaltix",
       },
       {
         "<leader>ap",
-        "<cmd>ClaudeProfile Default<cr>",
-        desc = "Claude profile: Default",
+        "<cmd>ClaudeProfile Personal<cr>",
+        desc = "Claude profile: Personal",
       },
     },
   },
